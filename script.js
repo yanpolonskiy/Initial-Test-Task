@@ -96,11 +96,6 @@ function fillTheTable() {
     .then(resp => resp.json())
     .then(result => prepareData(result))
     .then(data => addDataToTable(data))
-    .catch(e => alert("Something gone wrong"));
+    .catch(e => alert("Something gone wrong, try to reload page"));
   setTimeout(fillTheTable, 4000);
-}
-function clearTable() {
-  while (TBODY.lastChild) {
-    TBODY.removeChild(TBODY.lastChild);
-  }
 }

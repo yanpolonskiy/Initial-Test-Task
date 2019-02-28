@@ -3,8 +3,8 @@ const API_URL =
 
 const TBODY = document.querySelector("#table-body");
 const DOMODEDOVO_COORDS = [55.414722, 37.900278];
-const KNOT_COEFICIENT = 1.852;
-const FOOT_COEFICIENT = 3.281;
+const KNOT_COEFICIENT = 1.852; //данные по скорости приходят в узлах, коэфициент для перевода узлов в км/ча
+const FOOT_COEFICIENT = 0.3048; //данные по высоте приходят в футах
 
 class Api {
   constructor() {
@@ -25,8 +25,7 @@ class Api {
 }
 
 const api = new Api();
-updateTable();
-setInterval(updateTable, 4000);
+fillTheTable();
 
 /**
  * @param {Object} принимает объект из апи
@@ -57,13 +56,14 @@ function addDataToTable(data) {
     const speed = p[5] * KNOT_COEFICIENT;
     const height = p[4] * FOOT_COEFICIENT;
     tdDatas.push(
-      `${p[1]}, ${p[2]}`,
-      speed.toFixed(2),
-      p[3],
-      height.toFixed(2),
-      p[11],
-      p[12],
-      `${p[13]}/${p[16]}`
+      `${p[1]}, ${p[2]}`, //Координаты
+      speed.toFixed(2), //скорость
+      p[3], //курс
+      height.toFixed(2), //высота
+      p[11], //вылет
+      p[12], //прилет
+      `${p[13]}/${p[16]}`, //номер рейса
+      getDistanceToDomodedovo([p[1], p[2]])
     );
     tdDatas.forEach(d => {
       const td = document.createElement("td");
@@ -83,6 +83,7 @@ function addDataToTable(data) {
   });
 }
 
+// расстояние между 2 точками есть квадратный корень суммы квадратов разностей координат
 function getDistanceToDomodedovo(coords) {
   return Math.sqrt(
     Math.pow(coords[0] - DOMODEDOVO_COORDS[0], 2) +
@@ -90,12 +91,14 @@ function getDistanceToDomodedovo(coords) {
   );
 }
 
-function updateTable() {
+function fillTheTable() {
   api
     .getPlanesData()
     .then(resp => resp.json())
     .then(result => prepareData(result))
-    .then(data => addDataToTable(data));
+    .then(data => addDataToTable(data))
+    .catch(e => alert("Something gone wrong"));
+  setTimeout(fillTheTable, 4000);
 }
 function clearTable() {
   while (TBODY.lastChild) {

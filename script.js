@@ -2,7 +2,7 @@ const API_URL =
   "https://data-live.flightradar24.com/zones/fcgi/feed.js?bounds=56.84,55.27,33.48,41.48";
 
 const TBODY = document.querySelector("#table-body");
-const DOMODEDOVO_COORDS = [55.414722, 37.900278];
+const DOMODEDOVO_COORDS = [55.410307, 37.902451];
 const KNOT_COEFICIENT = 1.852; //данные по скорости приходят в узлах, коэффициент для перевода узлов в км/ча
 const FOOT_COEFICIENT = 0.3048; //данные по высоте приходят в футах, коэффициент для перевода футов в метры
 

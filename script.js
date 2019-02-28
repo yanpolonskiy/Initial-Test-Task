@@ -3,8 +3,8 @@ const API_URL =
 
 const TBODY = document.querySelector("#table-body");
 const DOMODEDOVO_COORDS = [55.414722, 37.900278];
-const KNOT_COEFICIENT = 1.852; //данные по скорости приходят в узлах, коэфициент для перевода узлов в км/ча
-const FOOT_COEFICIENT = 0.3048; //данные по высоте приходят в футах
+const KNOT_COEFICIENT = 1.852; //данные по скорости приходят в узлах, коэффициент для перевода узлов в км/ча
+const FOOT_COEFICIENT = 0.3048; //данные по высоте приходят в футах, коэффициент для перевода футов в метры
 
 class Api {
   constructor() {

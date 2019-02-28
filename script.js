@@ -69,11 +69,13 @@ function addDataToTable(data) {
       td.innerHTML = d;
       tr.appendChild(td);
     });
+    //чтобы таблица не моргала, если уже есть строка с таким номером, то заменим, если нет, то добавим
     if (TBODY.children[index]) {
       TBODY.replaceChild(tr, TBODY.children[index]);
     } else {
       TBODY.appendChild(tr);
     }
+    //удалим строки оставшиеся от предыдущих данных, если длина новых данных < старых данных
     if (index === data.length - 1 && TBODY.children.length - 1 > index) {
       for (let i = index + 1; i < TBODY.children.length; i++) {
         TBODY.removeChild(TBODY.children[i]);

@@ -62,8 +62,7 @@ function addDataToTable(data) {
       height.toFixed(2), //высота
       p[11], //вылет
       p[12], //прилет
-      `${p[13]}/${p[16]}`, //номер рейса
-      getDistanceToDomodedovo([p[1], p[2]])
+      `${p[13]}/${p[16]}` //номер рейса
     );
     tdDatas.forEach(d => {
       const td = document.createElement("td");
